@@ -1,0 +1,119 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+
+\title{Computer Architecture \\ Sample Final Exam \\}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\textbf{Instructions:}
+\begin{itemize}[noitemsep]
+    \item You have \textbf{180 minutes}. The exam consists of \textbf{10 questions}, worth \textbf{180 points total}.
+    \item For multiple-choice questions, indicate your answer clearly (e.g., \(\bigcirc\)).
+    \item For coding and math questions, \textbf{show all your work}.
+    \item Assume a 64-bit RISC-V architecture unless otherwise stated.
+\end{itemize}
+
+\hrule
+\vspace{0.2cm}
+
+\textbf{Name: \hfill Student ID: \hfill Signature:} \\
+\textit{``I pledge that I have neither given nor received unauthorized aid on this exam.''}
+
+\vspace{0.2cm}
+\hrule
+
+\section*{Question 1: Number Systems (15 points)}
+\begin{enumerate}[label=\textbf{Q1.\arabic*}]
+    \item Convert \(0b11010101\) (8-bit signed) to decimal and hexadecimal. (2 points)
+    \item Convert \(-75\) into a 16-bit two's complement binary number. If not possible, state why. (3 points)
+    \item Represent \(0xC1A00000\) as an IEEE-754 single-precision floating-point number in the form \(x \times 2^y\), where \(1 \leq |x| < 2\). (5 points)
+    \item Given \(X = 0b1101\) and \(Y = 0b1011\), compute \(X \oplus Y\) and \(X \& Y\). (5 points)
+\end{enumerate}
+
+\section*{Question 2: RISC-V Assembly (20 points)}
+Write a RISC-V assembly function \texttt{reverse\_bits} that takes an integer in \texttt{a0}, reverses its bits, and returns the result in \texttt{a0}. For example, if \texttt{a0 = 0b1011}, the function should return \texttt{0b1101}. Assume a 32-bit integer. (20 points)
+
+\section*{Question 3: Pipelining (20 points)}
+A RISC-V pipeline executes the following sequence of instructions:
+\begin{verbatim}
+    add x5, x6, x7
+    lw x8, 0(x5)
+    sub x9, x8, x5
+    beq x9, x0, label
+\end{verbatim}
+\begin{enumerate}[label=\textbf{Q3.\arabic*}]
+    \item Identify all data hazards in the sequence. Specify the registers and instructions involved. (10 points)
+    \item Explain how a forwarding unit would resolve one of these hazards. Include a diagram if necessary. (10 points)
+\end{enumerate}
+
+\section*{Question 4: Caches (20 points)}
+Assume a 32-byte direct-mapped cache with 8-byte blocks and a 16-bit memory address.
+\begin{enumerate}[label=\textbf{Q4.\arabic*}]
+    \item Calculate the number of tag, index, and offset bits. (5 points)
+    \item Determine whether each of the following addresses will result in a hit or miss if the cache is initially empty. The sequence of memory accesses is: \texttt{0x0010, 0x0018, 0x0020, 0x0010}. (10 points)
+    \item Briefly discuss the advantages and disadvantages of direct-mapped caches compared to fully associative caches. (5 points)
+\end{enumerate}
+
+\section*{Question 5: Virtual Memory (20 points)}
+Your system has a 64-bit virtual address space, 32 GiB of physical memory, and 4 KiB pages.
+\begin{enumerate}[label=\textbf{Q5.\arabic*}]
+    \item How many bits are required for the page offset, VPN, and PPN? (5 points)
+    \item Compute the size of a single-level page table (in bytes). Assume each page table entry stores the PPN without additional metadata. (10 points)
+    \item Explain how TLBs improve performance in a virtual memory system. (5 points)
+\end{enumerate}
+
+\section*{Question 6: Parallel Programming (20 points)}
+The following code estimates \(\pi\) using the Monte Carlo method. It is parallelized with OpenMP:
+\begin{verbatim}
+    int count = 0;
+    #pragma omp parallel for
+    for (int i = 0; i < N; i++) {
+        double x = random();
+        double y = random();
+        if (x * x + y * y <= 1) {
+            #pragma omp critical
+            count++;
+        }
+    }
+\end{verbatim}
+\begin{enumerate}[label=\textbf{Q6.\arabic*}]
+    \item Explain why using \texttt{\#pragma omp critical} can reduce performance. Suggest an alternative. (10 points)
+    \item Modify the code to avoid using \texttt{critical} while maintaining correctness. (10 points)
+\end{enumerate}
+
+\section*{Question 7: Control Logic (15 points)}
+Given the following FSM:
+\[
+\begin{aligned}
+\text{States: } & S_0, S_1, S_2, S_3 \\
+\text{Transitions: } & S_0 \xrightarrow[]{0} S_0, \ S_0 \xrightarrow[]{1} S_1, \ S_1 \xrightarrow[]{0} S_2, \\
+                    & S_1 \xrightarrow[]{1} S_3, \ S_2 \xrightarrow[]{0} S_0, \ S_2 \xrightarrow[]{1} S_3, \\
+                    & S_3 \xrightarrow[]{0, 1} S_3
+\end{aligned}
+\]
+Draw the state diagram and implement the FSM using logic gates. (15 points)
+
+\section*{Question 8: Advanced Problem (25 points)}
+You are given a CPU with:
+- 4 stages: Fetch, Decode, Execute, Writeback
+- A unified L1 cache with a hit rate of 80% and a latency of 3 cycles
+- Main memory latency of 50 cycles
+
+\begin{enumerate}[label=\textbf{Q8.\arabic*}]
+    \item Calculate the effective CPI if the base CPI is 1.2, and 40% of instructions are memory accesses. (15 points)
+    \item Discuss two architectural changes that could improve performance. (10 points)
+\end{enumerate}
+
+---
+
+Good luck!
+\end{document}
