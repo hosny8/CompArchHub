@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+
+\title{CS 61C: Computer Architecture \\
+Fall 2024 \\
+\textbf{Final Exam}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\textbf{Instructions:}
+\begin{itemize}[noitemsep]
+    \item You have \textbf{180 minutes}. The exam consists of \textbf{10 questions}, worth \textbf{100 points total}.
+    \item For multiple-choice questions, clearly indicate your answer by filling the appropriate bubble.
+    \item For coding questions, write your solutions clearly in the provided spaces.
+    \item Assume RISC-V architecture for all assembly code questions unless stated otherwise.
+\end{itemize}
+
+\hrule
+\vspace{0.2cm}
+
+\textbf{Name: \hfill Student ID: \hfill Signature:} \\
+\textit{``I pledge that I have neither given nor received unauthorized aid on this exam.''}
+
+\vspace{0.2cm}
+\hrule
+
+\section*{Question 1: Number Representations (10 points)}
+\begin{enumerate}[label=\textbf{Q1.\arabic*}]
+    \item Convert the following 8-bit two's complement binary number to decimal: \texttt{0b11101100}. (2 points)
+    \item Represent \(-45\) in 8-bit two's complement binary. If not possible, write \texttt{None}. (2 points)
+    \item Interpret \texttt{0xC0800000} as an IEEE-754 single-precision floating-point number. Express your answer in the form \(x \times 2^y\), where \(1 \leq |x| < 2\). (3 points)
+    \item True or False: All RISC-V instructions are 4 bytes in size. (1 point)
+    \item If a cache has a hit rate of 95\%, a hit time of 2 cycles, and a miss penalty of 50 cycles, what is the Average Memory Access Time (AMAT)? (2 points)
+\end{enumerate}
+
+\section*{Question 2: RISC-V Assembly (12 points)}
+Write a RISC-V assembly function that computes the maximum of an array of integers. The function should take two arguments:
+\begin{itemize}[noitemsep]
+    \item \texttt{a0}: the address of the array
+    \item \texttt{a1}: the number of elements in the array
+\end{itemize}
+The result (maximum value) should be returned in \texttt{a0}. (12 points)
+
+\textit{Assume all values are signed 32-bit integers. Use only the following registers: \texttt{a0, a1, t0, t1, t2}.}
+
+\section*{Question 3: Pipelines (10 points)}
+\begin{enumerate}[label=\textbf{Q3.\arabic*}]
+    \item Identify the types of hazards in the following RISC-V program and specify the stages involved: (5 points)
+    \begin{verbatim}
+        addi t0, x0, 5
+        addi t1, x0, 10
+        mul t2, t0, t1
+        add t3, t2, t1
+    \end{verbatim}
+    \item A RISC-V pipeline includes a forwarding unit to resolve hazards. Explain how this unit works and provide an example of a data hazard that it resolves. (5 points)
+\end{enumerate}
+
+\section*{Question 4: Caches (13 points)}
+\begin{enumerate}[label=\textbf{Q4.\arabic*}]
+    \item A cache has 64 lines, each of size 16 bytes, and uses direct mapping. How many bits are used for the offset, index, and tag in a 32-bit address? (3 points)
+    \item Assume a program accesses the following sequence of memory addresses: 
+    \[
+    \texttt{0x200, 0x210, 0x220, 0x200, 0x230, 0x240, 0x200}
+    \]
+    Calculate the number of hits and misses if the cache is initially empty. (5 points)
+    \item Explain the trade-offs between direct-mapped and fully associative caches. (5 points)
+\end{enumerate}
+
+\section*{Question 5: Virtual Memory (10 points)}
+Suppose a system has a virtual address space of \(2^{32}\) bytes, a physical memory of \(2^{24}\) bytes, and a page size of \(2^{12}\) bytes.
+\begin{enumerate}[label=\textbf{Q5.\arabic*}]
+    \item How many entries are in the page table? (2 points)
+    \item How many bits are required for the page offset, virtual page number (VPN), and physical page number (PPN)? (3 points)
+    \item Discuss the advantages and disadvantages of using a Translation Lookaside Buffer (TLB). (5 points)
+\end{enumerate}
+
+\section*{Question 6: OpenMP Parallelization (10 points)}
+\begin{enumerate}[label=\textbf{Q6.\arabic*}]
+    \item Rewrite the following loop using OpenMP directives to parallelize it: (5 points)
+    \begin{verbatim}
+        for (int i = 0; i < N; i++) {
+            array[i] = array[i] * 2;
+        }
+    \end{verbatim}
+    \item Explain how OpenMP handles race conditions and how you can prevent them. (5 points)
+\end{enumerate}
+
+\section*{Question 7: Final Thoughts (1 point)}
+If you could change one feature of the RISC-V ISA, what would it be and why? (1 point)
+
+\end{document}
