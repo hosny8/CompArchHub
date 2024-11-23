@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\title{CSM CS 61C Mentoring: 9 - Virtual Memory Maze}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Virtual Memory Maze}
+
+You’re a systems engineer tasked with optimizing the performance of a powerful computer used by NASA researchers. This machine processes massive datasets from distant galaxies, and every cycle saved brings them closer to new discoveries. Dive into its virtual memory and caching systems to make it faster than ever.
+
+Suppose we have the following virtual memory configuration:
+\begin{itemize}
+    \item \textbf{Virtual Address Space:} 32 bits
+    \item \textbf{Physical Memory:} 64KiB
+    \item \textbf{Page Size:} 128 bytes
+    \item \textbf{TLB:} 4-way set-associative with a total of 16 entries, using an LRU replacement policy
+\end{itemize}
+Refer to the following diagrams and descriptions to answer the questions.
+
+\subsection*{(a) Multiple Subparts}
+
+\begin{enumerate}[label=\arabic*.]
+    \item How many bits are required for the offset, assuming each page is 128 bytes? \\[0.3cm]
+
+    \item How many bits are required for the virtual page number (VPN) if we use a 32-bit virtual address space? \\[0.3cm]
+
+    \item How many bits are required for the physical page number (PPN), given a 64KiB physical memory? \\[0.2cm]
+\end{enumerate}
+
+\vspace{0.4cm}
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{VPN:} & \textbf{PPN:} & \textbf{Offset:} \\
+        \hline
+        \hspace{2cm} & \hspace{2cm} & \hspace{2cm} \\
+        \hline
+    \end{tabular}
+    \vspace{0.4cm}
+\end{center}
+
+
+
+4. How many entries are in the page table? Express your answer as a power of 2.
+
+\vspace{1.2cm}
+
+\subsection*{(b) Fill-in Table}
+
+Suppose the following accesses occur sequentially: \texttt{0x2000 0000}, \texttt{0x2000 0040}, \texttt{0x2000 0080}, and \texttt{0x2000 00C0}. Assume that the TLB is initially empty and each page is 128 bytes. For each access, determine if it results in a TLB hit or miss. If a TLB entry needs to be evicted, use the \textbf{LRU replacement policy}.
+
+\begin{center}
+    \renewcommand{\arraystretch}{2.5}  % Increase row height
+    \begin{tabular}{|p{3cm}|p{3cm}|p{3.5cm}|p{3cm}|}
+        \hline
+        \textbf{Virtual Address} & \textbf{TLB Hit/Miss} & \textbf{Evicted VPN (if applicable)} & \textbf{PPN (after translation)} \\
+        \hline
+        0x2000 0000 & & & \\
+        \hline
+        0x2000 0040 & & & \\
+        \hline
+        0x2000 0080 & & & \\
+        \hline
+        0x2000 00C0 & & & \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\subsection*{(c) Page Faults and Page Table Entries}
+
+Suppose \texttt{arr} is an array that spans multiple pages. Accessing \texttt{arr[i]} at intervals of 1024 elements (\texttt{arr[1024]}, \texttt{arr[2048]}, \texttt{arr[3072]}, ...) results in page faults. How many unique page table entries will be loaded by the time \texttt{arr[3072]} is accessed?
+
+\vspace{1cm}
+
+\subsection*{(d) Data-Level Parallelism (DLP) and Virtual Memory}
+
+You are given an array \texttt{arr} of 2048 integers stored in a contiguous memory block. Suppose each integer is 4 bytes, and we want to sum all elements of \texttt{arr} using SIMD instructions to improve performance.
+
+\begin{enumerate}[label=\arabic*.]
+    \item How many elements of \texttt{arr} can be loaded simultaneously into a 256-bit SIMD register? \\[0.9cm]
+
+    \item If \texttt{arr} starts at virtual address \texttt{0x3000 0000} and the TLB only has space for 4 entries, describe the impact on TLB performance when summing \texttt{arr} in chunks using SIMD, given the limited TLB entries and LRU replacement policy. \\[0.2cm]
+\end{enumerate}
+
+\end{document}
