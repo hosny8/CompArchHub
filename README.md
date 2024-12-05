@@ -21,17 +21,4 @@ The materials include, but are not limited to:
 - Parallel programming (OpenMP, SIMD)
 - Logic gates and finite state machines
 
-## Repository Structure
-```plaintext
-├── worksheets/
-│   ├── worksheet1.tex
-│   ├── worksheet2.tex
-│   └── ...
-├── exams/
-│   ├── exam1.tex
-│   ├── exam2.tex
-│   └── ...
-├── templates/
-│   └── template.tex  # A LaTeX template for creating new materials
-├── README.md
-└── LICENSE
+
