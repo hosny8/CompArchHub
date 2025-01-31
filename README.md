@@ -6,7 +6,7 @@ Welcome to Hosny's **ArchLab**, a repository dedicated to computer architecture 
 
 - **Purpose**: 
   - Create fun and thought-provoking content for computer architecture enthusiasts.
-  - Support the Computer Science Mentors (CSM) club at UC Berkeley with high-quality learning materials.
+  - Support the Computer Science Mentors (CSM) club at UC Berkeley.
 - **Content**: 
   - Worksheets and exams covering various computer architecture topics.
   - Written entirely in LaTeX.
@@ -18,7 +18,7 @@ The materials include, but are not limited to:
 - Pipelining and hazard detection
 - Memory hierarchy and caching
 - Virtual memory and paging
-- Parallel programming (OpenMP, SIMD)
+- Parallel programming (OpenMP, OpenMPI, SIMD)
 - Logic gates and finite state machines
 
 
